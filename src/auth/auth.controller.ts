@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { UserService } from '@/shared/user.service';
 import { LoginDTO, RegisterDTO } from './auth.dto';
 import { AuthService } from './auth.service';
+import { User } from '@/utilities/user.decorators';
 
 @Controller('auth')
 export class AuthController {
@@ -43,7 +44,8 @@ export class AuthController {
 
   @Get()
   @UseGuards(AuthGuard('jwt'))
-  tmpAuth() {
+  async findAll(@User() user: any) {
+    console.log(user);
     return {
       auth: 'works',
     };

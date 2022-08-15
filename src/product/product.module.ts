@@ -1,15 +1,11 @@
-import { ProductSchema } from '@/models/product.schema';
-import { SharedModule } from '@/shared/shared.module';
+import { Product } from '@/typeorm/entity/product.entity';
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'Product', schema: ProductSchema }]),
-    SharedModule,
-  ],
+  imports: [TypeOrmModule.forFeature([Product])],
   controllers: [ProductController],
   providers: [ProductService],
 })

@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import typeormConfig from './config/typeorm';
+import { LoggerModule } from 'nestjs-pino';
 //引入mongooseModule
 // import { MongooseModule } from '@nestjs/mongoose';
 // import { SharedModule } from './shared/shared.module';
@@ -16,6 +17,16 @@ import { ProductModule } from './product/product.module';
     // AuthModule,
     ProductModule,
     TypeOrmModule.forRoot(typeormConfig),
+    LoggerModule.forRoot({
+      pinoHttp: {
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            singleLine: true,
+          },
+        },
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

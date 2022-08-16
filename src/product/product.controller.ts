@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Patch,
   Post,
   Put,
@@ -11,6 +12,7 @@ import { ProductService } from './product.service';
 
 @Controller('product')
 export class ProductController {
+  private readonly logger = new Logger('nest-shop');
   constructor(private productService: ProductService) {}
 
   @Get()
